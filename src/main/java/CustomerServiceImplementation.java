@@ -16,8 +16,32 @@ public class CustomerServiceImplementation implements CustomerServices{
 
     @Override
     public String transferMoney(int sendersAccountNumber, int receiversAccountnumber, int amountToBeTransfared) {
+        Customer sendingCustomer = null;
+        Customer  receivingCustomer = null;
+        for (Customer value : customerList) {
+            if (value.getAccountNumber() == sendersAccountNumber && value.getLoggedIn()) {
+                sendingCustomer = value;
+                System.out.println(sendingCustomer);
+            }
+        }
+        for (Customer customer : customerList) {
+            if (customer.getAccountNumber() == receiversAccountnumber) {
+                System.out.println(customer.getAccountNumber());
+                receivingCustomer = customer;
+                System.out.println(customer);
+                System.out.println(receivingCustomer);
+            }
+        }
+        assert sendingCustomer != null;
+        if(sendingCustomer.getAccountBalance() >= amountToBeTransfared){
+                sendingCustomer.setAccountBalance(sendingCustomer.getAccountBalance() - amountToBeTransfared);
+            assert receivingCustomer != null;
+            receivingCustomer.setAccountBalance(receivingCustomer.getAccountBalance() + amountToBeTransfared);
+                return "Money transfared successfully";
+            }else{
+                return  "Insufficient Balance";
+            }
 
-        return null;
     }
 
     @Override
