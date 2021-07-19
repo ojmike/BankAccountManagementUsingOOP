@@ -6,7 +6,7 @@ public class CustomerServiceImplementation implements CustomerServices{
     @Override
     public String logIn(Customer customer) {
         customer.setLoggedIn(true);
-        return null;
+        return customer.getFirstName() + "loggedin successfully";
     }
 
     @Override
@@ -23,6 +23,7 @@ public class CustomerServiceImplementation implements CustomerServices{
     @Override
     public String withdrawMoney(Customer customer, int amount) {
         if(customer.getLoggedIn() == true && customer.getAccountBalance() >= amount){
+            customer.setAccountBalance(customer.getAccountBalance() - amount);
             return amount + " successfully withdrawn";
         }else if(customer.getLoggedIn() == true && customer.getAccountBalance() < amount){
             return "Insufficient Balance";

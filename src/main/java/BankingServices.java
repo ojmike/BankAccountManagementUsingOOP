@@ -7,6 +7,9 @@ public class BankingServices {
 
         customerServices.registerNewCustomer(ade);
        customerServices.logIn(ade);
+       ade.setAccountBalance(500);
+
         System.out.println( customerServices.withdrawMoney(ade,500));
+
     }
 }
